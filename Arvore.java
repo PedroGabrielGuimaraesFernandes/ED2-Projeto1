@@ -1,3 +1,7 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
 class No {
     public int chave = 0;
     public String Nome;
@@ -11,6 +15,7 @@ class No {
 }
 
 public class Arvore{
+    private No raiz;
     void insere (int valor) {
         No p = raiz, q = null , novo;
         while (p != null) {
@@ -112,15 +117,26 @@ public class Arvore{
             imprimir(alvo.dir, espaco + "   ");
         }
     }
+    
+    public static String lerArquivo(String filename) {
+        try{
+            return String.join("", Files.readAllLines(Paths.get(filename)));
+        }catch (IOException e) {
+            System.out.println("Arquivo inválido");
+            return null;
+        }
+    }
 
     public static void main(String[] args){
-    System.out.println(altura(null));
-    No raiz = new No(100);
-    raiz.esq = new No(25);
-    raiz.esq.esq = new No(18);
-    raiz.dir = new No(45);
-    raiz.dir.esq = new No(75);
-    MostrarNiveis(raiz, 0);
-    imprimir(raiz, " ");
+        // System.out.println(altura(null));
+        // No raiz = new No(100);
+        // raiz.esq = new No(25);
+        // raiz.esq.esq = new No(18);
+        // raiz.dir = new No(45);
+        // raiz.dir.esq = new No(75);
+        // MostrarNiveis(raiz, 0);
+        // imprimir(raiz, " ");
+        String conteudo = lerArquivo("familia.txt");
+        System.out.println(conteudo);
+    }
  }
-}
