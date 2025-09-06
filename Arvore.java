@@ -138,6 +138,28 @@ public class Arvore{
         return p;
     } 
 
+    // No busca(No p, int chave){
+    //     if (p != null){
+    //         if (chave < p.chave)
+    //         p = busca(p.esq, chave);
+    //         else if (chave > p.chave)
+    //         p = busca(p.dir, chave);
+    //     }
+    //     return p;
+    // }
+
+    public No BuscaPreOrdem(No p, String nome){
+        if (p != null){
+        if(p.nome.equals(nome))
+            return p;
+        BuscaPreOrdem(p.esq, nome);
+        BuscaPreOrdem(p.dir, nome);
+        }
+
+        return null;
+    }
+
+
 
     public  int altura(No alvo){
         if(alvo == null){
@@ -157,9 +179,17 @@ public class Arvore{
         }
     }
 
+    // public  void MostrarNiveis(No alvo, int nivel){
+    //     if (alvo != null){
+    //         System.out.println(alvo.chave + " " + nivel);
+    //         MostrarNiveis(alvo.esq, nivel + 1);
+    //         MostrarNiveis(alvo.dir, nivel + 1);
+    //     }
+    // }
+
     public  void MostrarNiveis(No alvo, int nivel){
         if (alvo != null){
-            System.out.println(alvo.chave + " " + nivel);
+            System.out.println(alvo.nome + " " + nivel);
             MostrarNiveis(alvo.esq, nivel + 1);
             MostrarNiveis(alvo.dir, nivel + 1);
         }
@@ -182,6 +212,16 @@ public class Arvore{
         }
     }
 
+    public void acharParentesco(String linha){
+        String[] nomes = linha.split(" ");
+        //Checar se os dois nomes constam na arvore
+        if(BuscaPreOrdem(raiz, nomes[0]) == null || BuscaPreOrdem(raiz, nomes[1]) == null){
+            System.out.println("sem relação");
+            return;
+        }
+
+    }
+
     public static void main(String[] args){
         // System.out.println(altura(null));
         // No raiz = new No(100);
@@ -197,7 +237,7 @@ public class Arvore{
 
         arvore.insere(conteudo);
         arvore.imprimir(arvore.raiz, " ");
-
+        arvore.MostrarNiveis(arvore.raiz, 0);
 
     }
  }
