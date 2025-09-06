@@ -1,7 +1,7 @@
 # ED2-Projeto1
 Repositorio para o projeto 1 de Estrutura de Dados 2
-1 Árvore da Família
-O Problema
+# 1 Árvore da Família
+## O Problema
 Você foi contratado para desenvolver um programa que determina se existe algum parentesco entre duas pessoas e, caso exista, qual é o grau de parentesco.
 Este problema envolve a aplicação da estrutura de uma árvore para determinar o grau de
 parentesco que existe entre pares de pessoas que podem fazer parte de uma mesma “árvore da
@@ -46,6 +46,6 @@ de p e q), onde p é um descendente-m de r e q é um descendente-n de r.
 Então, pode definição, os primos p e q são primos-“k
 ◦” se, e somente se, k = min(n, m),
 e, também por definição, p e q são “primos em grau j” se, e somente se, j = | n − m |.
-4. irmão — primo-0
+4.  irmão — primo-0
 ◦
 em grau 0 são “irmãos” (possuem o mesmo pai).
