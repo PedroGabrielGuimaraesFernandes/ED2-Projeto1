@@ -4,7 +4,7 @@ import java.io.IOException;
 
 class No {
     public int chave = 0;
-    public String Nome;
+    public String nome;
     public No esq = null, dir = null;
     public No(){
         chave = 0; esq = null; dir = null;
@@ -12,10 +12,65 @@ class No {
     public No(int v){
         chave = v; esq = null; dir = null;
     }
+
+    public No(String n){
+        nome = n; esq = null; dir = null;
+    }
 }
 
 public class Arvore{
-    private No raiz;
+    public No raiz;
+
+    void insere(String texto) {
+    String[] linhas = texto.split("\n");
+    No[] nodes = new No[linhas.length * 2];
+    int nodeCount = 0; // Contador para próxima posição livre
+    
+    for(String linha : linhas) {
+        String[] nomes = linha.split(" ");
+        No filho = null;
+        No pai = null;
+        
+        // Buscar ou criar o FILHO
+        for(int j = 0; j < nodeCount; j++) {
+            if(nodes[j] != null && nodes[j].nome.equals(nomes[0])) {
+                filho = nodes[j];
+                break;
+            }
+        }
+        if(filho == null) {
+            filho = new No(nomes[0]);
+            nodes[nodeCount++] = filho;
+        }
+        
+        // Buscar ou criar o PAI
+        for(int j = 0; j < nodeCount; j++) {
+            if(nodes[j] != null && nodes[j].nome.equals(nomes[1])) {
+                pai = nodes[j];
+                break;
+            }
+        }
+        if(pai == null) {
+            pai = new No(nomes[1]);
+            nodes[nodeCount++] = pai;
+        }
+        
+        // Definir raiz se necessário
+        if(raiz == null) {
+            raiz = pai;
+        }
+        
+        // Criar relação
+        if(pai.esq == null) {
+            pai.esq = filho;
+        } else if(pai.dir == null) {
+            pai.dir = filho;
+        } else {
+            System.out.println("Pai " + pai.nome + " já tem dois filhos!");
+        }
+    }
+    }
+
     void insere (int valor) {
         No p = raiz, q = null , novo;
         while (p != null) {
@@ -84,7 +139,7 @@ public class Arvore{
     } 
 
 
-    public static int altura(No alvo){
+    public  int altura(No alvo){
         if(alvo == null){
             return -1;
         }
@@ -102,7 +157,7 @@ public class Arvore{
         }
     }
 
-    public static void MostrarNiveis(No alvo, int nivel){
+    public  void MostrarNiveis(No alvo, int nivel){
         if (alvo != null){
             System.out.println(alvo.chave + " " + nivel);
             MostrarNiveis(alvo.esq, nivel + 1);
@@ -110,17 +165,17 @@ public class Arvore{
         }
     }
 
-    public static void imprimir(No alvo, String espaco){
+    public  void imprimir(No alvo, String espaco){
          if (alvo != null){
             imprimir(alvo.esq, espaco + "   ");
-            System.out.println(espaco + alvo.chave);
+            System.out.println(espaco + alvo.nome);
             imprimir(alvo.dir, espaco + "   ");
         }
     }
     
-    public static String lerArquivo(String filename) {
+    public  String lerArquivo(String filename) {
         try{
-            return String.join("", Files.readAllLines(Paths.get(filename)));
+            return String.join("\n", Files.readAllLines(Paths.get(filename)));
         }catch (IOException e) {
             System.out.println("Arquivo inválido");
             return null;
@@ -136,7 +191,15 @@ public class Arvore{
         // raiz.dir.esq = new No(75);
         // MostrarNiveis(raiz, 0);
         // imprimir(raiz, " ");
-        String conteudo = lerArquivo("familia.txt");
+        Arvore arvore = new Arvore();
+        String conteudo = arvore.lerArquivo("familia.txt");
         System.out.println(conteudo);
+
+        arvore.insere(conteudo);
+        arvore.imprimir(arvore.raiz, " ");
+
+
     }
  }
+
+  
