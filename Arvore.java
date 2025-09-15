@@ -137,11 +137,11 @@ public class Arvore {
     }
 
     //Primos
-    if (d1 > 1 && d2 > 1) {
+    if (d1 >= 1 || d2 >= 1) {
         int grau = Math.abs(d1 - d2);       // diferença de gerações
         int m = Math.min(d1, d2) - 1;       // grau do primo
         if (m == 0) {                        // primo-0
-            System.out.println("primo-" + grau);
+            System.out.println("primo-" + grau+ " em grau " + m);
         } else {                             
             System.out.println("primo-" + grau + " em grau " + m);
         }
