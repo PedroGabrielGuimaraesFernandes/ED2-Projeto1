@@ -141,9 +141,9 @@ public class Arvore {
         int grau = Math.abs(d1 - d2);       // diferença de gerações
         int m = Math.min(d1, d2) - 1;       // grau do primo
         if (m == 0) {                        // primo-0
-            System.out.println("primo-" + grau+ " em grau " + m);
+            System.out.println("primo-" + m+ " em grau " + grau);
         } else {                             
-            System.out.println("primo-" + grau + " em grau " + m);
+            System.out.println("primo-" + m + " em grau " + grau);
         }
         return;
     }
@@ -182,8 +182,8 @@ public class Arvore {
 
         arvore.insere(conteudo);
 
-        System.out.println("Árvore:");
-        arvore.imprimir(arvore.raiz, "");
+        //System.out.println("Árvore:");
+        //arvore.imprimir(arvore.raiz, "");
 
         Scanner sc = new Scanner(System.in);
         System.out.println("\nDigite os pares de nomes separados por espaço (ou 'fim' para sair):");
